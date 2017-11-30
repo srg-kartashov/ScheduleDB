@@ -1,5 +1,5 @@
 ﻿create database ScheduleDB
-
+sdasdddasd
 use ScheduleDB
 
 --Белинский
