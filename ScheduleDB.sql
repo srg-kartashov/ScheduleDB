@@ -1,5 +1,4 @@
 ﻿create database ScheduleDB
-sdflkghdlfkjshgfsdjgh;sfjedkhgljsdhflg;ils
 use ScheduleDB
 
 --Белинский
