@@ -1,6 +1,6 @@
 ﻿create database ScheduleDB
 use ScheduleDB
-
+sdfsdfdssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss
 --Белинский
 create table Subject_table(
 id int IDENTITY(1,1) not null primary key,
