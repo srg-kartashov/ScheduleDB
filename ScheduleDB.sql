@@ -1,6 +1,5 @@
 ﻿create database ScheduleDB
 use ScheduleDB
-sdfsdfdssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss
 --Белинский
 create table Subject_table(
 id int IDENTITY(1,1) not null primary key,
@@ -14,7 +13,7 @@ Values
 --Белинский
 create table TypeWeek_table(
 id int IDENTITY(1,1) not null primary key,
-TypeWeek nvarchar(50) not null) --предлогаю 1 нечетная 2 четная
+TypeWeek nvarchar(50) not null)
 insert into TypeWeek_table
 Values 
 ('Четная'),
@@ -48,7 +47,7 @@ Values
 --Ющенко
 create table UniversityHousing_table (
 id int IDENTITY (1,1) NOT NUll primary key,
---NameUniversityHousing nvarchar(500) NOT NULL,--
+--NameUniversityHousing nvarchar(500) NOT NULL,--поменяли
 AddressStreet nvarchar(200) NOT NULL,
 AddressNumber int NOT NULL)
 insert into UniversityHousing_table
@@ -78,17 +77,16 @@ Values
 ('Институт математики, экономики и механики',1)
 
 --Карташов
-create table LectureHall_table(
+create table LectureHall_table(--Поменяли
 id int IDENTITY (1,1) NOT NULL primary key,
 id_UniversityHousing int foreign key references UniversityHousing_table(id),
-NumberLectureHall int NOT NULL,
-Subgroup nvarchar(1) NULL,
+NumberLectureHall nvarchar(10) NOT NULL,
 Storey int NOT NULL)
 insert into LectureHall_table
 Values 
-(1,50,'б',1),
-(1,44,NULL,1),
-(1,96,NULL,2)
+(1,'50',1),
+(1,'44',1),
+(1,'96',2)
 
 --Ющенко
 create table UniversityPulpit_table(
@@ -100,7 +98,7 @@ insert into UniversityPulpit_table
 Values 
 ('Кафедра истории древнего мира и средних веков',2,1),
 ('Кафедра французской филологии',2,3),
-('Кафедра теоретической механики',1,3)--ошибка
+('Кафедра теоретической механики',1,3)
 
 --Ющенко
 create table UniversityTeachers_table(
@@ -155,6 +153,7 @@ id_UniversityTime int foreign key references UniversityTime_table(id) NULL,
 id_TypeWeek int foreign key references TypeWeek_table(id) NULL,
 id_TypeOfSubject int foreign key references TypeOfSubject_table(id),
 )
+
 insert into Schedule_table
 Values 
 (1,1,1,1,1,NULL,1,1),
