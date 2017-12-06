@@ -1,6 +1,7 @@
 ﻿create database ScheduleDB
+
 use ScheduleDB
-sdfsdfdssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss
+
 --Белинский
 create table Subject_table(
 id int IDENTITY(1,1) not null primary key,
@@ -60,9 +61,15 @@ Values
 create table UniversityTime_table(
 id int IDENTITY (1,1) NOT NULL primary key,
 NumberCouple int NOT NULL,
-StartCouple time(2) NOT NULL,
-EndCouple time(2) NOT NULL,
+StartCouple time(0) NOT NULL,
+EndCouple time(0) NOT NULL,
 id_UniversityHousing int foreign key references UniversityHousing_table(id))--дописать
+
+INSERT INTO UniversityTime_table
+Values 
+(1,'8:00','9:20'),
+(2,'9:40','11:00'),
+(3,'11:10','12:30')
 
 
 --Карташов
