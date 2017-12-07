@@ -67,9 +67,9 @@ id_UniversityHousing int foreign key references UniversityHousing_table(id))--д
 
 INSERT INTO UniversityTime_table
 Values 
-(1,'8:00','9:20'),
-(2,'9:40','11:00'),
-(3,'11:10','12:30')
+(1,'8:00','9:20',1),
+(2,'9:40','11:00',2),
+(3,'11:10','12:30',1)
 
 
 --Карташов
@@ -123,10 +123,9 @@ Values
 ('Троцкий','Лев','Давидович',1,1)
 
 --Карташов
-create table Group_table(--name--потоки--переделать
---подгруппы 
-
+create table Group_table(--name--потоки--переделать--подгруппы 
 id int IDENTITY (1,1) NOT NULL primary key,
+NameOfGroup nvarchar(50) NOT NULL,
 id_UniversityTeachers int foreign key references UniversityTeachers_table(id),
 YearStart int NOT NULL,
 YearFinish int NOT NULL,
@@ -135,9 +134,9 @@ Subgroup nvarchar(1) NULL,
 id_Faculty int foreign key references UniversityFaculty_table(id))
 insert into Group_table
 Values 
-(1,2014,2018,3,1,4),
-(2,2015,2019,1,2,1),
-(1,2016,2020,2,NULL,3)
+('Механики',1,2014,2018,3,1,4),
+('Компьютерные инженеры',2,2015,2019,1,2,1),
+('Прикладные математики',1,2016,2020,2,NULL,3)
 
 create table TypeOfSubject_table(
 id int IDENTITY (1,1) NOT NULL primary key,
@@ -160,16 +159,17 @@ id_Day int foreign key references Day_table(id),
 id_UniversityTime int foreign key references UniversityTime_table(id) NULL,
 id_TypeWeek int foreign key references TypeWeek_table(id) NULL,
 id_TypeOfSubject int foreign key references TypeOfSubject_table(id),
+isFlow bit NOT NULL
 )
 
 insert into Schedule_table
 Values 
-(1,1,1,1,1,NULL,1,1),
-(2,2,2,2,2,NULL,2,2),
-(3,3,3,3,3,NULL,1,3)
+(1,1,1,1,1,1,1,1,1),
+(2,2,2,2,2,2,2,2,0),
+(3,3,3,3,3,3,1,3,1)
 
-select Subject_table.SubjectName, Group_table.id_Faculty,UniversityTeachers_table.TeachersSurname,LectureHall_table.NumberLectureHall,Day_table.NameOfDay,
-NULL,TypeWeek_table.TypeWeek,TypeOfSubject_table.NameOfSubjectType from Schedule_table
+select UniversityTime_table.NumberCouple ,Group_table.NameOfGroup,UniversityFaculty_table.NameFaculty ,Subject_table.SubjectName,UniversityTeachers_table.TeachersSurname,LectureHall_table.NumberLectureHall,Day_table.NameOfDay,
+TypeWeek_table.TypeWeek,TypeOfSubject_table.NameOfSubjectType,isFlow, UniversityTime_table.StartCouple,UniversityTime_table.EndCouple from Schedule_table
 left join Subject_table on Subject_table.id = Schedule_table.id_Subject
 left join Group_table on Group_table.id = Schedule_table.id_Group
 left join UniversityTeachers_table on UniversityTeachers_table.id = Schedule_table.id_UniversityTeachers
@@ -178,3 +178,4 @@ left join Day_table on Day_table.id = Schedule_table.id_Day
 left join UniversityTime_table on UniversityTime_table.id = Schedule_table.id_UniversityTime
 left join TypeWeek_table on TypeWeek_table.id = Schedule_table.id_TypeWeek
 left join TypeOfSubject_table on TypeOfSubject_table.id = Schedule_table.id_TypeOfSubject
+left join UniversityFaculty_table on UniversityFaculty_table.id = Group_table.id_Faculty
